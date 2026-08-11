@@ -26,6 +26,7 @@ idlerZ = 16;
 roadRadius = 7;
 roadZ = 13;  // road wheels roll on the belt's inner surface (belt upper edge at this height)
 roadPositions = [-22, -6, 10, 24];
+bushingRadius = 4;  // rubber suspension bushing outer radius (steel caps are R+2, axle bore r=1.5)
 
 linkLength = 10;
 linkWidth = trackWidth + 2;
