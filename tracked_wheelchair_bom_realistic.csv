@@ -1,0 +1,26 @@
+Item,Qty,Unit Price (INR),Total (INR),Retailer / Source,Notes
+Custom rubber track (stair-climber rated),2,15000,30000,IndiaMART / custom rubber track mfr,Person-rated tracks - hobby belts WILL fail under load
+Drive sprocket + hub (machined steel),2,2500,5000,Local CNC / IndiaMART,Keyed to 17mm motor shaft; pitch-matched to track
+"Idler wheel (flanged, bearing)",2,1500,3000,Robu.in / IndiaMART,Front/rear tension idlers
+Road / bogie wheel (PU 100mm),8,350,2800,Robu.in / Robocraze,"Heavy-duty PU, not hobby plastic"
+Drive motor 24V 350W w/ electromagnetic brake,2,7500,15000,Xrobo / RoboticsDNA / Robokits,MY1016ZL 350W high-torque
+"Dual motor controller (brushed, 50A)",1,3500,3500,Robu.in / RoboticsDNA,Separate from joystick
+Joystick controller 24V,1,9000,9000,Robokits / RoboticsDNA (WB5003),"Person-safe control, 5-speed"
+IMU / tilt sensor + safety cutoff,1,1500,1500,Robu.in,Required for stair-tilt balance
+Battery 24V 20Ah LiFePO4,1,18000,18000,IndiaMART / Loom Solar,Deep-cycle for drive + lift
+Battery charger 29.2V,1,1500,1500,Robu.in / Amazon India,LiFePO4 CC/CV
+Linear actuator 12V 6000N (hydraulic jack),1,6000,6000,Robu.in / The Engineer Store / IndiaMART,Lifts chair ~600kg rated
+Support wheels for jack axle (pair),1,600,600,Robu.in,2 small steel/PU wheels
+Suspension struts / gas springs,4,1500,6000,Robu.in / IndiaMART,Independent-arm suspension
+Aluminium extrusion 4040 + brackets,1,10000,10000,IndiaMART / SunElectronics,Chassis + suspension + seat pedestal
+Steel rod / tube for axles + spindles,1,4000,4000,Local steel market,Cross-track axles
+"Seat (cushion, backrest, upholstery)",1,6000,6000,Local wheelchair dealer / Amazon India,"Waterproof, breathable"
+Footrest assembly,1,2500,2500,Local fabrication,Aluminium platform + heel/toe guards
+Bearings + bushings (all),1,3000,3000,Robu.in / local bearing shop,Quality 6200/6000 series
+Fasteners + hardware,1,2500,2500,Local hardware,
+"Wiring harness, connectors, fuses, switchgear",1,3000,3000,Robu.in / Amazon India,Automotive-grade
+Microcontroller + electronics (ESP32 etc.),1,2500,2500,Robu.in / Probots,Control logic + sensor readout
+Custom machining / welding / fabrication,1,25000,25000,Local fabricator,"Frame, mounts, brackets, assembly"
+Paint / powder coating / finishing,1,4000,4000,Local,Protective finish
+Contingency (10%),,16420,16420,,
+TOTAL,,,180620,,

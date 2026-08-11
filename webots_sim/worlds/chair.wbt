@@ -1,0 +1,254 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+
+WorldInfo {
+  info ["Tracked Wheelchair - Stair Climbing Mechanism"]
+  title "Tracked Wheelchair"
+  basicTimeStep 16
+  FPS 60
+  gravity 9.81
+  contactProperties [
+    ContactProperties {
+      material1 "default"
+      material2 "track material"
+      coulombFriction [
+        0.9
+      ]
+      bounceVelocity 0.05
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.1 0 1 0.35
+  position -0.25 0.35 0.5
+  follow "chair"
+}
+TexturedBackground {
+}
+DirectionalLight {
+  castShadows TRUE
+  intensity 1.0
+  ambientIntensity 0.4
+  direction -0.4 -0.7 0.3
+}
+DirectionalLight {
+  castShadows FALSE
+  intensity 0.3
+  direction 0.3 -0.5 -0.4
+}
+
+# Ground (top surface at y=0)
+Solid {
+  name "ground"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.35 0.33 0.30
+        roughness 0.9
+        metalness 0.0
+      }
+      geometry Box { size 20 0.2 10 }
+    }
+  ]
+  boundingObject Box { size 20 0.2 10 }
+  translation 0 -0.1 0
+}
+
+# Stairs — rise 0.03, run 0.05, slope ~31° (descending in +X)
+Solid {
+  name "stair_1"
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.48 0.45 0.42 roughness 0.85 }
+      geometry Box { size 0.05 0.03 1.5 }
+    }
+  ]
+  boundingObject Box { size 0.05 0.03 1.5 }
+  translation 0.14 -0.015 0
+}
+Solid {
+  name "stair_2"
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.48 0.45 0.42 roughness 0.85 }
+      geometry Box { size 0.05 0.03 1.5 }
+    }
+  ]
+  boundingObject Box { size 0.05 0.03 1.5 }
+  translation 0.19 -0.045 0
+}
+Solid {
+  name "stair_3"
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.48 0.45 0.42 roughness 0.85 }
+      geometry Box { size 0.05 0.03 1.5 }
+    }
+  ]
+  boundingObject Box { size 0.05 0.03 1.5 }
+  translation 0.24 -0.075 0
+}
+Solid {
+  name "stair_4"
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.48 0.45 0.42 roughness 0.85 }
+      geometry Box { size 0.05 0.03 1.5 }
+    }
+  ]
+  boundingObject Box { size 0.05 0.03 1.5 }
+  translation 0.29 -0.105 0
+}
+Solid {
+  name "stair_5"
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.48 0.45 0.42 roughness 0.85 }
+      geometry Box { size 0.05 0.03 1.5 }
+    }
+  ]
+  boundingObject Box { size 0.05 0.03 1.5 }
+  translation 0.34 -0.135 0
+}
+
+# ================= CHAIR (articulated tracked robot) =================
+Supervisor {
+  name "chair"
+  controller "chair_controller"
+  children [
+    # --- Body visual (scaled mm -> m) ---
+    Transform {
+      scale 0.001 0.001 0.001
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.55 0.57 0.60
+            roughness 0.5
+            metalness 0.3
+          }
+          geometry Mesh {
+            url ["../meshes/body.stl"]
+          }
+        }
+      ]
+    }
+
+    # --- Left track: hinges at front sprocket (drive sprocket, X=+48mm) ---
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.048 0 0.022
+        axis 0 1 0
+        minStop -0.6
+        maxStop 0.6
+      }
+      device [
+        RotationalMotor {
+          name "left_tilt"
+          maxTorque 200
+        }
+        PositionSensor {
+          name "left_tilt_sensor"
+        }
+      ]
+      endPoint Solid {
+        name "left_track"
+        children [
+          Transform {
+            scale 0.001 0.001 0.001
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.12 0.12 0.14
+                  roughness 1.0
+                  metalness 0.0
+                }
+                geometry Mesh {
+                  url ["../meshes/track_left.stl"]
+                }
+              }
+            ]
+          }
+        ]
+        boundingObject Transform {
+          translation 0 0.028 0.022
+          children [
+            Box {
+              size 0.13 0.016 0.045
+            }
+          ]
+        }
+        contactMaterial "track material"
+        physics Physics {
+          density -1
+          mass 3
+        }
+      }
+    }
+
+    # --- Right track ---
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.048 0 0.022
+        axis 0 1 0
+        minStop -0.6
+        maxStop 0.6
+      }
+      device [
+        RotationalMotor {
+          name "right_tilt"
+          maxTorque 200
+        }
+        PositionSensor {
+          name "right_tilt_sensor"
+        }
+      ]
+      endPoint Solid {
+        name "right_track"
+        children [
+          Transform {
+            scale 0.001 0.001 0.001
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.12 0.12 0.14
+                  roughness 1.0
+                  metalness 0.0
+                }
+                geometry Mesh {
+                  url ["../meshes/track_right.stl"]
+                }
+              }
+            ]
+          }
+        ]
+        boundingObject Transform {
+          translation 0 -0.028 0.022
+          children [
+            Box {
+              size 0.13 0.016 0.045
+            }
+          ]
+        }
+        contactMaterial "track material"
+        physics Physics {
+          density -1
+          mass 3
+        }
+      }
+    }
+  ]
+  translation 0 0.10 0
+  boundingObject Transform {
+    translation 0 0 0.06
+    children [
+      Box {
+        size 0.13 0.08 0.12
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 20
+  }
+}

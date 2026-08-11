@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<robot name="vlee">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.30" rpy="0 0 0"/>
+      <mass value="197.3"/>
+      <inertia ixx="3.5" ixy="0" ixz="0" iyy="2.5" iyz="0" izz="3.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.30" rpy="0 0 0"/>
+      <geometry><box size="0.62 0.16 0.10"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.30" rpy="0 0 0"/>
+      <geometry><box size="0.62 0.16 0.10"/></geometry>
+    </collision>
+  </link>
+  <link name="road_L_m0.22">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_L_m0.22" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_L_m0.22"/>
+    <origin xyz="-0.22 -0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="road_L_m0.06">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_L_m0.06" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_L_m0.06"/>
+    <origin xyz="-0.06 -0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="road_L_0.10">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_L_0.10" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_L_0.10"/>
+    <origin xyz="0.1 -0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="road_L_0.24">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_L_0.24" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_L_0.24"/>
+    <origin xyz="0.24 -0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="idler_L">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.1" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.1" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="idler_L" type="continuous">
+    <parent link="base_link"/>
+    <child link="idler_L"/>
+    <origin xyz="0.41 -0.27 0.115" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="sprocket_L">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.104" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.104" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="sprocket_L" type="continuous">
+    <parent link="base_link"/>
+    <child link="sprocket_L"/>
+    <origin xyz="-0.41 -0.27 0.115" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="road_R_m0.22">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_R_m0.22" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_R_m0.22"/>
+    <origin xyz="-0.22 0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="road_R_m0.06">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_R_m0.06" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_R_m0.06"/>
+    <origin xyz="-0.06 0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="road_R_0.10">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_R_0.10" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_R_0.10"/>
+    <origin xyz="0.1 0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="road_R_0.24">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="road_R_0.24" type="continuous">
+    <parent link="base_link"/>
+    <child link="road_R_0.24"/>
+    <origin xyz="0.24 0.27 0.081" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="idler_R">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.1" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.1" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="idler_R" type="continuous">
+    <parent link="base_link"/>
+    <child link="idler_R"/>
+    <origin xyz="0.41 0.27 0.115" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <link name="sprocket_R">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.6"/>
+      <inertia ixx="0.0025" ixy="0" ixz="0" iyy="0.0025" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.104" length="0.16"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.104" length="0.16"/></geometry>
+    </collision>
+  </link>
+  <joint name="sprocket_R" type="continuous">
+    <parent link="base_link"/>
+    <child link="sprocket_R"/>
+    <origin xyz="-0.41 0.27 0.115" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+</robot>

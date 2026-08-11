@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vlee Stair Climb — Physics Sim</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #111; }
+    canvas { display: block; }
+    #ui { position: fixed; top: 8px; left: 8px; color: #eee; font: 14px monospace; pointer-events: none; z-index: 10; }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/node_modules/three/build/three.module.js",
+      "three/": "/node_modules/three/",
+      "@dimforge/rapier3d": "/node_modules/@dimforge/rapier3d/rapier.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="ui">Vlee Physics Sim — loading...</div>
+  <script type="module">
+    import { createSim } from "./src/sim.js";
+    const { step, render, getTick, camera, renderer } = await createSim();
+    document.getElementById("ui").textContent = "Vlee Physics Sim — running";
+    let running = true, frame = 0;
+    function loop() {
+      if (running) {
+        step();
+        render();
+        frame++;
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
+    window.__sim = { step, render, getTick, camera, renderer, get running() { return running; }, set running(v) { running = v; } };
+    window.__captureFrame = () => renderer.domElement.toDataURL("image/png");
+  </script>
+</body>
+</html>

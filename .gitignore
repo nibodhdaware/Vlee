@@ -1,0 +1,21 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Renders / media (large)
+renders/
+renders_light/
+*.mp4
+
+# Archives
+*.zip
+
+# FEA working dir
+fc_sim/fem/
+
+# OS
+.DS_Store

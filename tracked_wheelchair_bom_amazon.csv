@@ -1,0 +1,22 @@
+Item,Qty,Unit Price (INR),Total (INR),Retailer / Source,Amazon Link,Notes
+Rubber continuous track (caterpillar),2,3500,7000,IndiaMART / Robomart,Not available on Amazon,Heavy-duty rubber caterpillar belt sized for stair-climbing tracks (14cm wide - Amazon only has 4cm max)
+Drive sprocket (toothed),2,850,1700,IndiaMART,Not available on Amazon,Steel sprocket keyed to motor shaft; matches track pitch
+Idler wheel (front/rear),2,800,1600,Robu.in / Robomart,Not available on Amazon,Flanged idler with bearing for tension side of track
+Road / bogie wheel (PU 100mm),8,200,1600,Robu.in / Robocraze,Not available on Amazon,Polyurethane wheels for rocker-bogie suspension (Amazon has smaller unrated wheels)
+Drive gear motor 24V 250W w/ electromagnetic brake,2,5500,11000,Amazon India / Robokits,https://www.amazon.in/dp/B08PVFSSJK,MY1016ZL 120RPM geared PMDC motor - Amazon price ₹5,500 each
+Joystick controller 24V,1,3500,3500,Amazon India,https://www.amazon.in/s?k=wheelchair+joystick+controller+24v,Electric wheelchair joystick + drive controller - verify WB5003 compatible
+Battery 24V 20Ah LiFePO4,1,14000,14000,Amazon India,https://www.amazon.in/s?k=24v+20ah+lifepo4+battery,With built-in BMS; ~480Wh for drive + jack
+Battery charger 29.2V,1,1200,1200,IndiaMART / Robu.in,https://www.amazon.in/dp/B0DG819XXL,LiFePO4-specific CC/CV charger - IndiaMART cheaper (₹1,200 vs ₹3,000+ on Amazon)
+Linear actuator 12V 300mm stroke (hydraulic jack),1,3000,3000,Amazon India,https://www.amazon.in/dp/B07VHNNZCC,Replaces hydraulic cylinder for seat lift - Amazon cheaper (₹3,000 vs ₹5,500)
+Support wheel / caster for jack (pair),1,400,400,Robu.in,https://www.amazon.in/s?k=100mm+polyurethane+wheel,Two small wheels on jack axle
+Gas spring / telescopic suspension strut,4,1200,4800,Robu.in / IndiaMART,Not available on Amazon,Independent mechanical-arm suspension per wheel
+Aluminium extrusion 4040 (1 m),6,620,3720,IndiaMART / SunElectronics,https://www.amazon.in/s?k=aluminium+extrusion+4040,Chassis cross-members + suspension beams
+Steel tube / rod for axles,1,2000,2000,Local steel market / IndiaMART,Not available on Amazon,Cross-track axles + spindles
+Seat cushion with waterproof cover,1,1500,1500,Amazon India,https://www.amazon.in/s?k=wheelchair+seat+cushion,Bucket seat padding + backrest
+Seat pedestal column + mounting plate,1,1800,1800,Local fabrication / IndiaMART,Not available on Amazon,Quick-release column on split-clamp hub
+Footrest platform + heel lip + toe guard,1,1500,1500,Local fabrication,Not available on Amazon,Aluminium/steel sheet
+Ball bearings (8-10mm),1,2000,2000,Robu.in / Local bearing shop,https://www.amazon.in/s?k=ball+bearing+8mm+10mm,Wheels + axles
+Fasteners (M5/M6/M8 bolts nuts washers),1,1500,1500,Robu.in / local hardware,https://www.amazon.in/s?k=M5+M6+M8+bolt+nut+washer,Full assembly hardware
+Electrical wiring connectors fuses switch,1,1500,1500,Amazon India,https://www.amazon.in/s?k=24v+relay+contactor+50a,Wiring harness for motors + battery
+Miscellaneous (paint foam welding consumables),1,2000,2000,Local market,Not available on Amazon,Finishing and assembly
+TOTAL,,,67920,,,

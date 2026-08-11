@@ -1,0 +1,14 @@
+key,value,unit,note
+weight_total_kg,205.3,kg,vehicle + driver
+weight_N,2014,N,mg
+cg_x_cm,-5.4,cm,+front (of CG)
+cg_y_cm,1.7,cm,+right
+cg_z_cm,34.9,cm,above ground
+pitch_down_max_deg,45.6,deg,nose-down (descend)
+pitch_up_max_deg,53.1,deg,nose-up (climb)
+roll_max_deg,42.8,deg,lateral
+drive_F_ramp_N,430.5,N,"needed on 10% grade, a=0.2"
+drive_T_motor_Nm,24.1,N·m,"per motor (r=9.5cm, eta .85)"
+drive_mu_needed,0.176,-,traction required
+F_slope_stair_28_N,945.7,N,stair incline force
+T_motor_stair_28_Nm,57.1,N·m,per motor

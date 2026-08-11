@@ -1,0 +1,17 @@
+========================================================================
+  STATIC (QUASI-STATIC) ANALYSIS - VLEE TRACKED WHEELCHAIR
+========================================================================
+  Vehicle mass         :  205.3 kg  (driver 75 kg)
+  Total weight         :   2014 N
+  CG    x= -5.4 cm  y= 1.7 cm  z=34.9 cm
+
+  TIP-OVER SAFETY (static base)
+    max nose-down pitch (descending) :  53.1 deg
+    max nose-up   pitch (climbing)   :  45.6 deg
+    max lateral roll (side slope)    :  42.8 deg
+
+  DRIVE BASIS
+    10% ramp: need 431 N at wheels, 24.1 N·m/motor
+    stair 28 deg     : need 1022 N at wheels, 57.1 N·m/motor
+    motor torque AVL: ~27 N·m continuous (350W @ 120rpm)
+========================================================================

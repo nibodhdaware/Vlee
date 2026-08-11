@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tracked Wheelchair URDF
+  Coordinate system: OpenSCAD convention (X=front/rear, Y=left/right, Z=up)
+  All dimensions in meters (converted from mm)
+-->
+<robot name="tracked_wheelchair">
+
+  <!-- ==================== MATERIALS ==================== -->
+  <material name="steel">
+    <color rgba="0.35 0.36 0.38 1.0"/>
+  </material>
+  <material name="dark_steel">
+    <color rgba="0.25 0.26 0.28 1.0"/>
+  </material>
+  <material name="rubber">
+    <color rgba="0.12 0.12 0.14 1.0"/>
+  </material>
+  <material name="aluminum">
+    <color rgba="0.55 0.57 0.60 1.0"/>
+  </material>
+  <material name="chrome">
+    <color rgba="0.70 0.72 0.75 1.0"/>
+  </material>
+  <material name="ground">
+    <color rgba="0.35 0.33 0.30 1.0"/>
+  </material>
+
+  <!-- ==================== LINKS ==================== -->
+
+  <!-- Base link: entire chair assembly -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="meshes/chair_assembly.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="aluminum"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry>
+        <!-- Track footprint: length x width x height -->
+        <box size="0.096 0.07 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <mass value="50.0"/>
+      <inertia ixx="0.5" ixy="0" ixz="0" iyy="0.5" iyz="0" izz="0.5"/>
+    </inertial>
+  </link>
+
+  <!-- Left track module -->
+  <link name="left_track_link">
+    <visual>
+      <origin xyz="0 0.028 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.016"/>
+      </geometry>
+      <material name="rubber"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.028 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.016"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Right track module -->
+  <link name="right_track_link">
+    <visual>
+      <origin xyz="0 -0.028 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.016"/>
+      </geometry>
+      <material name="rubber"/>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.028 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.012" length="0.016"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Seat assembly -->
+  <link name="seat_link">
+    <visual>
+      <origin xyz="0.048 0 0.086" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="meshes/seat.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="aluminum"/>
+    </visual>
+    <collision>
+      <origin xyz="0.048 0 0.086" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.072 0.072 0.007"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="8.0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <!-- Footrest -->
+  <link name="footrest_link">
+    <visual>
+      <origin xyz="-0.05 0 0.015" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="meshes/footrest.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="steel"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.05 0 0.015" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.036 0.038 0.005"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="2.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Hydraulic jack -->
+  <link name="hydraulic_link">
+    <visual>
+      <origin xyz="0.028 0 0.044" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="meshes/hydraulic.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="chrome"/>
+    </visual>
+    <collision>
+      <origin xyz="0.028 0 0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.005" length="0.042"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="3.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Ground link (static) -->
+  <link name="ground_link">
+    <visual>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="20 10 0.2"/>
+      </geometry>
+      <material name="ground"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="20 10 0.2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+
+  <!-- ==================== JOINTS ==================== -->
+
+  <!-- Left track to base -->
+  <joint name="left_track_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_track_link"/>
+    <origin xyz="0 0.028 0.022" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Right track to base -->
+  <joint name="right_track_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_track_link"/>
+    <origin xyz="0 -0.028 0.022" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Seat to base -->
+  <joint name="seat_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="seat_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Footrest to base -->
+  <joint name="footrest_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="footrest_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Hydraulic to base (prismatic for extension) -->
+  <joint name="hydraulic_joint" type="prismatic">
+    <parent link="base_link"/>
+    <child link="hydraulic_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-0.042" upper="0" effort="100" velocity="0.05"/>
+    <mimic joint="hydraulic_mimic"/>
+  </joint>
+
+  <!-- Ground to base (contact) -->
+  <joint name="ground_contact" type="fixed">
+    <parent link="ground_link"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+</robot>

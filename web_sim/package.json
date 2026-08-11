@@ -1,0 +1,25 @@
+{
+  "name": "web_sim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "dependencies": {
+    "@dimforge/rapier3d": "^0.20.0",
+    "gl": "^0.0.2",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^25.5.0",
+    "three": "^0.185.1"
+  },
+  "allowScripts": {
+    "gl@8.1.6": true,
+    "puppeteer@25.5.0": true
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

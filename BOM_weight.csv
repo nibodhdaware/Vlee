@@ -1,0 +1,118 @@
+Component,Qty,Material,Material Spec,Weight/Unit (kg),Total Weight (kg),Material Cost/Unit (₹),Total Material Cost (₹),Manufacturing Notes
+TRACK BELTS
+Track Belt (continuous),2,Natural Rubber + Aramid Cord,ISO 18579 compliant / 300kg min load,8.5,17.0,"4,500","9,000","Mould-cured stadium ring 105×73cm outer, 14cm wide, 3mm wall. Aramid cord reinforcement"
+WHEELS
+Idler Wheel,2,"Aluminum Hub (6061-T6) + Rubber Tyre",Hub: ASTM B221, Tyre: NBR compound,2.0,4.0,"2,200","4,400","CNC machined hub r=10cm, press-fitted rubber tyre. Bearing bore 25mm for 6205-2RS"
+Drive Sprocket,2,Aluminum 7075-T6 + Hardened Steel Teeth,ASTM B221 / AISI 4140,2.5,5.0,"3,000","6,000","CNC machined r=9.5cm + 12 hardened steel teeth, keyed to axle, 14cm wide"
+Road Wheel,4,"Aluminum Hub (6061) + Rubber Tyre",Hub: 6061, Tyre: SBR rubber,1.2,4.8,"1,200","4,800","Machined hub r=4cm, pressed rubber tyre r=7cm. 6205-2RS bearing seats"
+Wheel Bearings,12,Chrome Steel (GCr15 / 52100),DIN 625 / ABEC-1,0.08,0.96,70,840,6205-2RS sealed deep groove, 25×52×15mm
+SUSPENSION
+Rubber Bushing,4,Natural Rubber (Shore 50A),ASTM D2000,0.35,1.4,"150","600","Cylindrical bushing r=4cm, h=6cm. Provides spring + damping"
+Bushing Mounting Plate,8,Aluminum 6061-T6,ASTM B221,0.05,0.4,20,160,"r=6cm, h=2mm. Top and bottom plates for each bushing"
+Spindle Pin,4,Aluminum 7075-T6,ASTM B221,0.2,0.8,80,320,"r=4cm, 18cm long. Lightweight alloy replaces steel"
+FRAME & STRUCTURE
+L-Bracket,2,Aluminum 6061-T6 (6mm plate),ASTM B221,0.9,1.8,360,720,"Foot clamp + vertical riser + horizontal arm. CNC machined from 6mm aluminum plate"
+L-Bracket Suspension Arm,4,Aluminum 6061-T6 (4mm plate),ASTM B221,0.15,0.6,60,240,"L-shaped bracket connecting riser to suspension beam. CNC machined"
+Chassis Axle,2,Aluminum 7075-T6,ASTM B221,2.5,5.0,500,"1,000","r=5cm, 64cm span. 1/3 weight of steel axles"
+Idler Axle,2,Aluminum 7075-T6,ASTM B221,2.0,4.0,400,800,"r=4cm, 64cm span. Lightweight alloy"
+Cross-Bar (armrest),1,Aluminum 6061-T6 Tube (40×40×3mm),ASTM B221,0.4,0.4,40,40,"Connects L-bracket arms at armPivotX"
+SEAT ASSEMBLY
+Seat Pan,1,Aluminum 6061-T6 (3mm sheet),ASTM B209,2.5,2.5,"1,000","1,000","66×66cm rounded rect, CNC router cut. Brake-formed edges"
+Leather Cushion,1,Top-Grain Leather + PU Foam,ISO 17227 compliant,1.2,1.2,"1,200","1,200","56×58×5cm contoured pad, waterproof leather cover, zip-off for cleaning"
+Backrest Panel,1,Aluminum 6061-T6 (3mm sheet),ASTM B209,1.8,1.8,720,720,"56×72cm, 8° recline angle. Brake-formed from single sheet"
+Lumbar Leather Pad,1,Top-Grain Leather + PU Foam,ISO 17227,0.3,0.3,300,300,"24×26cm lumbar support pad, leather covered"
+Headrest,1,Aluminum 6061-T6 (3mm sheet),ASTM B209,0.5,0.5,200,200,"28×16cm adjustable, T-bolt clamp to backrest"
+Seat Bolts & Rivets,1,Stainless Steel (AISI 316),ASTM A276 / F593,0.2,0.2,100,100,M5/M6 bolts, blind rivets, T-nuts"
+ARMRESTS
+Armrest Assembly,2,"Aluminum Post + Rail + Leather Pad",6061-T6 + leather,0.6,1.2,500,"1,000","68cm full-length pad, aluminum post and rail, bolt-on to cross-bar"
+Joystick Control,1,"Arduino Uno + analog joystick module + wiring",Mixed,0.08,0.08,600,600,"Right armrest. Analog joystick + Arduino reads inputs, drives motor drivers"
+FOOTREST
+Footrest Plate,1,Aluminum 6061-T6 (3mm sheet),ASTM B221,0.4,0.4,160,160,"28×34cm folding plate, 3mm aluminum with anti-slip texture"
+Footrest Brackets,1,Aluminum 6061-T6 (4mm plate),ASTM B221,0.15,0.15,60,60,"Clevis wings + vertical drop brackets. CNC machined"
+Footrest Pin,1,Stainless Steel (AISI 316),ASTM A276,0.05,0.05,15,15,"Ø8mm × 14cm pivot pin with cotter key"
+HYDRAULIC JACK
+Electric Linear Actuator,1,"24V DC Linear Actuator (500kg, 300mm stroke)",CE / ISO 9001,1.5,1.5,"7,500","7,500","24V DC actuator, 500kg force, 300mm stroke, metal gearbox, self-locking"
+Jack Wheels,2,"Aluminum Hub + Polyurethane Tyre",PU 92A Shore,0.2,0.4,150,300,"r=4cm, 10cm wide, PU tyre on aluminum hub"
+Jack Mounting Brackets,1,Aluminum 6061-T6 (6mm plate),ASTM B221,0.2,0.2,80,80,"Two plates straddling actuator, bolted to cross-brace"
+DRIVE SYSTEM
+Drive Motor,2,"24V 350W PMDC geared motor (MY1016ZL) w/ electromagnetic brake",CE / UL,3.2,6.4,"7,500","15,000","120 RPM, 17mm keyed shaft, integrated brake. One per track"
+Motor Driver (L298N / BTS7960),2,"Dual H-bridge motor driver module",—,0.1,0.2,300,600,"One per motor, handles 43A continuous. Mounted inside chassis"
+IMU / Tilt Sensor,1,"MPU6050 6-axis IMU module",—,0.01,0.01,150,150,"Tilt detection for safety cutoff on stairs"
+HARDWARE & FINISH
+Bolts / Nuts / Washers (M6-M12),1,Stainless Steel (AISI 304),ASTM A193 / F594,0.8,0.8,600,600,"Grade 8.8 structural bolts, nyloc nuts, spring washers. ~100 pieces"
+Pivot Pins (all),1,Aluminum 7075-T6,ASTM B221,0.15,0.15,60,60,"Ø8-10mm aluminum pins with R-clip retention"
+E-Clips / Snap Rings,1,Steel (DIN 471/472),DIN 471,0.05,0.05,150,150,"Axle retention clips, assorted sizes for wheel and pivot axles"
+Powder Coating,1,Polyester Powder Coat,Qualicoat / ISO 13433,0,0,"1,500","1,500","Full frame + brackets. Abrasion-resistant, UV-stable"
+ELECTRICAL SYSTEM
+Battery Pack (24V),1,LiFePO4 (24V 20Ah, deep-cycle),UN 38.3 / IEC 62133,5.0,5.0,"18,000","18,000","24V 20Ah LiFePO4 with BMS, ~480Wh. Powers drive motors + actuator"
+Wiring Harness,1,"Copper wire (14AWG), connectors, fuses",UL 1007,0.1,0.1,300,300,"Main power cable + fused connector to actuator"
+On/Off Switch,1,"Toggle switch (20A, 24V DC)",CE / UL,0.02,0.02,100,100,"Panel-mount toggle with waterproof boot"
+Battery Charger,1,"29.2V LiFePO4 CC/CV charger",BIS / CE,0.5,0.5,"1,500","1,500","LiFePO4-specific charger, Indian plug"
+TOOLING & FIXTURES (amortized)
+CNC Jigs (amortized),1,"Steel fixture plates, clamps",—,0,0,"1,500","1,500","Custom holding fixtures for CNC ops, split across unit batch"
+Cutting Tools (amortized),1,"Carbide end mills, drill bits",—,0,0,500,500,"Consumable tooling for aluminum machining"
+Saw Blades (amortized),1,"Carbide-tipped circular saw blades",—,0,0,300,300,"For cutting aluminum bar and plate stock"
+SURFACE PREP (before powder coat)
+Sandblasting Media,1,"Aluminum oxide (80 grit)",—,0,0,200,200,"Surface prep for powder coat adhesion"
+Degreasing Chemicals,1,"Acetone / isopropyl alcohol",—,0,0,150,150,"Parts degreasing before coating"
+Masking Materials,1,"High-temp tape, silicone plugs",—,0,0,100,100,"Mask bearing bores and threads during coating"
+WELDING (if TIG joining required)
+TIG Filler Rod (ER4043),1,"Ø1.6mm × 1m rods",AWS A5.10,0,0,200,200,"Aluminum TIG welding filler, ~10 rods"
+Argon Gas (bottle rental),1,"Industrial argon, 6m³ bottle",—,0,0,300,300,"Shielding gas for TIG welding aluminum"
+TIG Tungsten Electrodes,1,"2% lanthanated, Ø1.6mm",—,0,0,200,200,"Electrode tips, pack of 10"
+ASSEMBLY CONSUMABLES
+Threadlocker (Loctite 243),1,"Medium-strength, 50ml",—,0,0,150,150,"Threadlocker for critical bolts"
+Rubber Adhesive,1,"Bondaid / rubber-to-metal glue",—,0,0,100,100,"Bonding rubber bushings to mounting plates"
+Zip Ties (assorted),1,"Nylon, UV-resistant, 100-pack",—,0,0,80,80,"Cable management and temporary holds"
+Silicone Sealant,1,"RTV silicone, 100g tube",—,0,0,100,100,"Sealing joints, vibration damping"
+Anti-Slip Tape/Mesh,1,"Aluminum oxide grit tape, 1m",—,0,0,70,70,"Footrest surface texture"
+TESTING
+Load Test (120 kg),1,"Weight plates or hydraulic press test",—,0,0,"1,000","1,000","Static load test to 1.5× rated capacity"
+Cycle Test (10k cycles),1,"Actuator + track cycle rig",—,0,0,"1,500","1,500","10,000 extension-retraction cycles for actuator durability"
+PACKAGING
+Shipping Crate,1,"Plywood crate + foam inserts",—,0,0,800,800,"Protective crate for freight shipping"
+Protective Wrapping,1,"Bubble wrap + stretch film",—,0,0,200,200,"Component protection during transit"
+INSTRUCTIONS & DOCUMENTATION
+User Manual,1,"Printed booklet + safety sheet",—,0,0,150,150,"Operating instructions, maintenance schedule, warranty"
+Compliance Labels,1,"IS/ISO certification labels",—,0,0,100,100,"Product compliance and serial number plate"
+,,,,,,,,,,,
+SUBTOTALS,,,,,,,,
+Track System,,,,,17.0,,13,440,
+Wheel & Bearing System,,,,,9.8,,11,240,
+Suspension System,,,,,2.6,,760,
+Frame & Structure,,,,,12.4,,2,860,
+Seat Assembly,,,,,6.3,,3,420,
+Armrests,,,,,1.5,,1,200,
+Footrest,,,,,0.6,,235,
+Hydraulic Jack,,,,,2.1,,7,880,
+Drive System,,,,,6.69,"16,350",
+Hardware & Finish,,,,,1.0,,2,310,
+Electrical System,,,,,6.07,"19,900",
+Tooling & Fixtures,,,,,—,,2,300,
+Surface Prep,,,,,—,,450,
+Welding,,,,,—,,700,
+Assembly Consumables,,,,,—,,500,
+Testing,,,,,—,"2,500",
+Packaging,,,,,—,"1,000",
+Documentation,,,,,—,,250,
+,,,,,,,,,,,
+CHAIR WEIGHT,,,,~66.1 kg,,,
+TOTAL MATERIAL + CONSUMABLES,,,,,,"85,345",
+,,,,,,,,,,,
+EQUIVALENT RETAIL PRICING,,,,,,,,
+Manufacturing Cost (this BOM),,,,,,"85,345",
+Assembly + Testing (15%),,,,,,"12,802",
+Overhead + Profit (35%),,,,,,"34,022",
+Estimated Retail Price (India),,,,,,"1,32,169",
+Competitive Range (India Market),,,,,,"1,05,000 - 1,55,000",
+,,,,,,,,,,,
+DIMENSIONS
+Overall Length,,,,105 cm,,,
+Overall Width,,,,73 cm,,,
+Overall Height,,,,137 cm,,,
+Seat Height (ground),,,,,45 cm,,,
+Track Contact Length,,,,82 cm,,,
+Track Width (per side),,,,,14 cm,,,
+Max User Weight (designed),,,,,120 kg,,,
+Chair Weight (with user),,,,,186 kg,,,
+Stair Angle (max rated),,,,,35°,,,
