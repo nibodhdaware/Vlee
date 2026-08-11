@@ -35,35 +35,39 @@ module suspensionBeam(y) {
     beamEnd = idlerX - 12;
     beamLength = beamEnd - beamStart;
 
-    wall = 3;
-    boxH = 20;
-    boxW = 12;
+    // I-beam cross-section (structural profile, not a box)
+    H = 20;                  // overall height (z)
+    B = 12;                  // overall flange width (y)
+    tf = 3;                  // flange thickness (z)
+    tw = 3;                  // web thickness (y)
+    webH = H - 2 * tf;
 
     gussetH = 25;
-    gussetW = boxW + 4;
+    gussetW = B + 4;
     gussetT = 4;
 
     flangeLen = 12;
-    flangeH = boxH + 8;
-    flangeW = boxW + 8;
+    flangeH = H + 8;
+    flangeW = B + 8;
     axleR = 5.5;
 
     color(matAluminum)
     union() {
-        // Main beam tube
+        // I-beam: bottom flange, web, top flange (centered at beamZ)
+        translate([(beamStart + beamEnd) / 2, y, beamZ - H/2 + tf/2])
+            cube([beamLength, B, tf], center = true);
         translate([(beamStart + beamEnd) / 2, y, beamZ])
-            difference() {
-                cube([beamLength, boxW, boxH], center = true);
-                cube([beamLength - 2*wall, boxW - 2*wall, boxH - 2*wall], center = true);
-            }
+            cube([beamLength, tw, webH], center = true);
+        translate([(beamStart + beamEnd) / 2, y, beamZ + H/2 - tf/2])
+            cube([beamLength, B, tf], center = true);
 
         // Gusset at bracket end
         translate([beamEnd - gussetH/2, y, beamZ])
             cube([gussetH, gussetW, gussetT], center = true);
 
         // Vertical gusset plate at bracket end
-        translate([beamEnd - gussetH/2, y, beamZ + gussetT/2 + (boxH - gussetT)/4])
-            cube([gussetH, 3, (boxH - gussetT)/2], center = true);
+        translate([beamEnd - gussetH/2, y, beamZ + gussetT/2 + (H - gussetT)/4])
+            cube([gussetH, 3, (H - gussetT)/2], center = true);
 
         // Flange at chassis end - C-channel base
         translate([beamStart - flangeLen/2, y, beamZ])
@@ -73,7 +77,7 @@ module suspensionBeam(y) {
         translate([beamStart - flangeLen/2 + 3, y, beamZ])
             difference() {
                 cube([flangeLen - 6, flangeW, flangeH], center = true);
-                cube([flangeLen - 6 - 2*wall, flangeW - 2*wall, flangeH - 2*wall], center = true);
+                cube([flangeLen - 6 - 2*tw, flangeW - 2*tw, flangeH - 2*tw], center = true);
                 translate([-2, 0, -flangeH/2 + axleR + 2])
                     rotate([90, 0, 0])
                         cylinder(r = axleR, h = flangeW + 4, center = true, $fn = 24);

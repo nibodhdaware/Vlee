@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 import * as RAPIER from "@dimforge/rapier3d";
-
 // ── geometry (cm) — mirrors vlee_stl_pyvista.py ────────────────────────────
 // pyvista frames: x = along stairs (+ toward stairs), y = across, z = up.
 // three frames:   x = along, y = up (world), z = across.
@@ -50,7 +49,7 @@ async function loadSTLs() {
   ];
   const geos = {};
   for (const f of files) {
-    const g = await loader.loadAsync("stl/" + f);
+    const g = await loader.loadAsync("dist/stl/" + f);
     g.computeVertexNormals();
     // map pyvista (x,y,z) -> three (x, z, y): geometry is drawn in pyvista coords
     g.rotateX(-Math.PI / 2);
@@ -62,23 +61,22 @@ async function loadSTLs() {
 async function buildPhysics() {
   await RAPIER.init();
   world = new RAPIER.World({ x: 0, y: -981, z: 0 });
-  const bodies = world.bodies;
   ed = new RAPIER.EventQueue(false);
 
   // static ground
-  const gb = bodies.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(0, -5, 0));
-  bodies.createCollider(RAPIER.ColliderDesc.cuboid(999, 5, 999), gb);
+  const gb = world.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(0, -5, 0));
+  world.createCollider(RAPIER.ColliderDesc.cuboid(999, 5, 999), gb);
 
   // stairs
   for (let i = 0; i < STAIR_COUNT; i++) {
     const x0 = BASE + i * STAIR_TREAD, z0 = GROUND_Z + i * STAIR_RISER;
-    const sb = bodies.createRigidBody(
+    const sb = world.createRigidBody(
       RAPIER.RigidBodyDesc.fixed().setTranslation(x0 + STAIR_TREAD / 2, z0 + STAIR_RISER / 2, 0));
-    bodies.createCollider(RAPIER.ColliderDesc.cuboid(STAIR_TREAD / 2, STAIR_RISER / 2, 400), sb);
+    world.createCollider(RAPIER.ColliderDesc.cuboid(STAIR_TREAD / 2, STAIR_RISER / 2, 400), sb);
   }
-  const lb = bodies.createRigidBody(
+  const lb = world.createRigidBody(
     RAPIER.RigidBodyDesc.fixed().setTranslation(TOP_X + 100, TOP_Z + 5, 0));
-  bodies.createCollider(RAPIER.ColliderDesc.cuboid(120, 5, 400), lb);
+  world.createCollider(RAPIER.ColliderDesc.cuboid(120, 5, 400), lb);
 
   // ---- chair ----
   const cd = RAPIER.RigidBodyDesc.dynamic()
@@ -87,20 +85,21 @@ async function buildPhysics() {
     .setAngularDamping(0.6)
     .setLinearDamping(0.1)
     .setCcdEnabled(true);
-  chassis = bodies.createRigidBody(cd);
-  // main approximation collider (real mass visual from STL; collision from boxes)
-  bodies.createCollider(RAPIER.ColliderDesc.cuboid(45, 14, 10), chassis);           // track frame
-  bodies.createCollider(RAPIER.ColliderDesc.cuboid(30, 18, 12), chassis);           // seat mass
-  bodies.createCollider(RAPIER.ColliderDesc.cuboid(20, 6, 8), chassis);             // foot
+  chassis = world.createRigidBody(cd);
+  // colliders: near-massless (mass comes from setAdditionalMass above)
+  const mk = (d) => d.setDensity(1e-6).setFriction(0.8);
+  world.createCollider(mk(RAPIER.ColliderDesc.cuboid(45, 14, 10)), chassis);        // track frame
+  world.createCollider(mk(RAPIER.ColliderDesc.cuboid(30, 18, 12)), chassis);        // seat mass
+  world.createCollider(mk(RAPIER.ColliderDesc.cuboid(20, 6, 8)), chassis);          // foot
   // belt-bottom run: thin slab per side so stairs noses can wedge under
   for (const s of [-1, 1]) {
-    const coll = RAPIER.ColliderDesc
+    const coll = mk(RAPIER.ColliderDesc
       .cuboid(IDLER_X, 2, 2.5)
-      .setTranslation(s * TRACK_CY / 2, 0.8, 0)
+      .setTranslation(s * TRACK_CY, 0.8, 0))
       .setFriction(1.0);
-    bodies.createCollider(coll, chassis);
+    world.createCollider(coll, chassis);
   }
-  return bodies;
+  return world;
 }
 
 function buildScene(geos) {
@@ -146,45 +145,46 @@ function buildScene(geos) {
     "05": 0xd8dae0, "07": 0x111112, "08": 0x111112, "09": 0xd8dae0,
     "10": 0x56595c, "11": 0x1b1b1e, "12": 0x1b1b1e,
   };
-  const put = (mesh, x, y, z) => { mesh.position.set(x, y, z); chairGroup.add(mesh); return mesh; };
+  // place a part. pyvista offset (ox,oy,oz) -> three (ox, oz, -oy); mirror via scale.z.
+  const part = (geo, col, ox, oy, oz, sy = 1) => {
+    const m = new THREE.Mesh(geo, mat(col));
+    m.position.set(ox, oz, -oy);
+    if (sy === -1) m.scale.z = -1;
+    chairGroup.add(m);
+    return m;
+  };
 
-  // two belt halves visual (STL belt already spans full plane? just place once)
-  const belt = new THREE.Mesh(geos["12"], mat(colors["12"]));
-  belt.position.set(0, 0, BELT_Z_OFF);
-  chairGroup.add(belt);
+  part(geos["03"], colors["03"], 0, 0, 0);                    // chassis axles (symmetric)
 
-  for (const side of [-1, 1]) {
-    // wheels: adapter so wheel spin axis = x
+  for (const sy of [-1, 1]) {
+    const y = sy * TRACK_CY;                                   // track center, across
+    part(geos["12"], colors["12"], 0, y, BELT_Z_OFF, sy);      // track belt (centered STL)
     const wheel = (geo, col, x, z) => {
-      const mesh = new THREE.Mesh(geo, mat(col));
-      mesh.position.set(x, side * TRACK_CY / 2, z);
-      chairGroup.add(mesh);
-      spinMeshes.push(mesh);
-      return mesh;
+      const m = part(geo, col, x, y, z, sy);
+      spinMeshes.push(m);
+      return m;
     };
-    wheel(geos["07"], colors["07"], -IDLER_X / 1, IDLER_Z);   // idler front
+    wheel(geos["07"], colors["07"], -IDLER_X, IDLER_Z);        // idler front
     wheel(geos["04"], colors["04"], IDLER_X, IDLER_Z);         // sprocket rear
     for (const rx of ROAD_POS) wheel(geos["08"], colors["08"], rx, ROAD_Z);
-    const beam = new THREE.Mesh(geos["10"], mat(colors["10"]));
-    beam.position.set(0, side * TRACK_CY / 2, 0);
-    chairGroup.add(beam);
-    const bushing = new THREE.Mesh(geos["11"], mat(colors["11"]));
-    bushing.position.set(0, side * TRACK_CY / 2, 0);
-    chairGroup.add(bushing);
+    part(geos["10"], colors["10"], 0, 0, 0, sy);               // suspension beam (baked y=28)
+    for (const rx of ROAD_POS) part(geos["11"], colors["11"], rx, y, 0, sy);  // bushings
   }
 
   // seat group stays level (compensates tilt) — matches pyvista seat=root@ry(-tilt)
   B.seat = new THREE.Group();
   chairGroup.add(B.seat);
-  const addSeat = (geo, col) => {
+  const addSeat = (geo, col, ox, oy, oz, sy = 1) => {
     const m = new THREE.Mesh(geo, mat(col));
+    m.position.set(ox, oz, -oy);
+    if (sy === -1) m.scale.z = -1;
     B.seat.add(m);
     return m;
   };
-  addSeat(geos["09"], colors["09"]);   // brackets
-  addSeat(geos["02"], colors["02"]);   // bucket
-  addSeat(geos["01"], colors["01"]);   // armrests
-  addSeat(geos["05"], colors["05"]);   // footrest
+  for (const sy of [1, -1]) addSeat(geos["09"], colors["09"], 0, -sy, 0, sy);  // L brackets
+  addSeat(geos["02"], colors["02"], 0, 0, 0);   // bucket
+  addSeat(geos["01"], colors["01"], 0, 0, 0);   // armrests
+  addSeat(geos["05"], colors["05"], 0, 0, 0);   // footrest
   const ax = new THREE.Mesh(geos["03"], mat(colors["03"]));
   chairGroup.add(ax);
 
@@ -239,8 +239,9 @@ function phaseOf(tick) {
 
 function step() {
   const t = chassis.translation();
+  const v = chassis.linvel();
   const ph = phaseOf(tick);
-  let fx = 0, fy = 0, tau = 0, tx = 0, ty = 0, tz = 0;
+  let fx = 0, fy = 0, tau = 0;
 
   if (ph === "APPR") {
     // roll toward stairs, belt stays flat on ground
@@ -248,25 +249,33 @@ function step() {
   } else if (ph === "TILT") {
     // ease tilt to STAIR_ANGLE (hydraulic servo), stop forward
     const p = Math.min(1, (tick - PHASES.TILT[0]) / (PHASES.TILT[1] - PHASES.TILT[0]));
-    ty = -p * STAIR_ANGLE;              // target pitch (nose up = rotate +z?)
-    tx = 0;
-    // proportional pitch servo toward target about world z
-    const ang = chassis.rotation();
+    const ty = -p * STAIR_ANGLE;
     tau = PARAMS.pitchTorque * clampAngle(ty - currentPitchAng());
+    fx = 0;
   } else if (ph === "DRIVE") {
-    ty = -STAIR_ANGLE;
-    tau = PARAMS.pitchTorque * clampAngle(ty - currentPitchAng());
-    // drive along the stair slope: force at rear sprocket pointing forward+down
-    const slope = STAIR_RISER / STAIR_TREAD;
-    fx = 12000;
-    if (t.x > BASE) fy = -12000 * slope;
+    if (t.x > TOP_X - 10) {
+      // reached the landing: stop driving, brake (fall through to LEVEL logic)
+      tau = PARAMS.pitchTorque * clampAngle(0 - currentPitchAng());
+      if (v.x > 2) fx = -6000;
+      else if (v.x < -2) fx = 4000;
+    } else {
+      const ty = -STAIR_ANGLE;
+      tau = PARAMS.pitchTorque * clampAngle(ty - currentPitchAng());
+      // drive along the stair slope: force at rear sprocket pointing forward+down
+      const slope = STAIR_RISER / STAIR_TREAD;
+      fx = 12000;
+      if (t.x > BASE) fy = -12000 * slope;
+      // cap forward speed so it doesn't fly off the landing
+      if (v.x > PARAMS.maxForward * 100) fx = 0;
+    }
   } else if (ph === "LEVEL") {
-    ty = 0;
+    // on landing: level out and brake to a stop
+    const ty = 0;
     tau = PARAMS.pitchTorque * clampAngle(ty - currentPitchAng());
-    fx = t.x < TOP_X + 40 ? 8000 : 0;
+    if (v.x > 2) fx = -4000;      // brake
+    else if (v.x < -2) fx = 4000;
   }
 
-  if (tick === PHASES.TILT[0]) { /* marker */ }
   const f = { x: fx, y: fy, z: 0 };
   if (fx || fy) chassis.applyImpulse(f, true);
   if (tau) chassis.applyTorqueImpulse({ x: 0, y: 0, z: tau }, true);
@@ -295,6 +304,6 @@ export async function createSim() {
   await RAPIER.init();
   const geos = await loadSTLs();
   buildScene(geos);
-  buildPhysics();
-  return { step: () => { step(); syncPose(); }, render, camera, renderer, getTick: () => tick };
+  await buildPhysics();
+  return { step: () => { step(); syncPose(); }, render, camera, renderer, scene, getTick: () => tick, getPose: () => { const t = chassis.translation(); const r = chassis.rotation(); return { x: t.x, y: t.y, z: t.z, rx: r.x, ry: r.y, rz: r.z, tick }; } };
 }

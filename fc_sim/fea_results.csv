@@ -16,3 +16,5 @@ beam_bracket_to_chassis,981,488.17,2.8530,0.57,276,"981N at bracket end, fixed a
 beam_bracket_to_chassis,981,488.17,2.8536,0.57,276,"981N at bracket end, fixed at chassis end"
 beam_bracket_to_chassis,981,11.69,0.0183,23.60,276,"981N at bracket end, fixed at chassis end"
 beam_chassis_to_bracket,981,3.26,0.0013,84.60,276,"981N at chassis end, fixed at bracket end"
+beam_bracket_to_chassis,981,13.53,0.0166,20.40,276,"981N at bracket end, fixed at chassis end"
+beam_chassis_to_bracket,981,3.63,0.0008,76.09,276,"981N at chassis end, fixed at bracket end"
