@@ -2,16 +2,19 @@ include <parameters.scad>
 use <utils.scad>
 
 //================ SEAT SUPPORT FRAME (L-BRACKETS) =================//
-// Two L-brackets carry the seat. Each one sits on the cross-bar that
-// joins the two back drive sprockets. Aluminum construction.
-// Suspension beams mount to the outboard side of each bracket riser.
+// Two L-brackets carry the seat. Each pivots on the FRONT idler
+// cross-track axle (x = -idlerX) — the same axle the tracks tilt
+// about when climbing. The seat + footrest are one body that hangs
+// off this pivot and stays level while the tracks pitch underneath.
+// Suspension beams mount to the track frame, NOT to the seat.
 
 module seatBracket(y, w = 6) {
     panB = idlerZ + seatTopOffset - 5;   // pan bottom
-    barX = idlerX;                        // the drive cross-track bar (back sprockets)
-    barZ = idlerZ;                        // bar height = sprocket axle height
+    barX = -idlerX;                       // front idler cross-track axle = the pivot
+    barZ = idlerZ;                        // axle height
+    armBackX = idlerX - 14 + 2;           // reach back under the backrest
 
-    // Foot that clamps around the cross-track bar (wraps the axle).
+    // Hub that pivots on the front idler cross-track axle.
     // Pinch bolt secures the clamp.
     color(matDarkSteel)
         translate([barX, y, barZ])
@@ -25,23 +28,21 @@ module seatBracket(y, w = 6) {
         translate([barX, y, barZ + 6])
             cylinder(r = 1.2, h = 16, center = true, $fn = 12);
 
-    // Vertical riser — up from the bar to the pan bottom. Aluminum.
+    // Vertical riser — up from the pivot axle to the pan bottom. Aluminum.
     color(matAluminum)
         translate([barX, y, (barZ + panB) / 2])
             cube([5, w, panB - barZ], center = true);
 
-    // Horizontal arm: out from the riser, under the pan, to the seat.
-    armX2 = -30;
+    // Horizontal arm: from the riser back, under the pan, to the backrest.
     color(matAluminum)
-        translate([(barX + armX2) / 2, y, panB - 2])
-            cube([barX - armX2, w - 1, 4], center = true);
+        translate([(barX + armBackX) / 2, y, panB - 2])
+            cube([armBackX - barX, w - 1, 4], center = true);
 
     // Bolts up into the pan along the horizontal arm.
-    for (bx = [20, 8, -6, -18])
+    for (bx = [-28, -14, 0])
         color(matChrome)
             translate([bx, y, panB + 2])
-                rotate([0, bx == -18 ? -6 : 0, 0])
-                    cylinder(r = 1.5, h = 6, center = true, $fn = 12);
+                cylinder(r = 1.5, h = 6, center = true, $fn = 12);
 }
 
 //================ BUCKET SEAT =================//

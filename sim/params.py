@@ -1,37 +1,39 @@
-# Parameters matching the OpenSCAD prototype
+# Parameters matching the OpenSCAD prototype (SCAD/parameters.scad is authoritative)
+# Re-conciliated to the SCAD 82cm machine on 2026-08-11:
+#   previously diverged to 96cm/18x24/42mm until probe scripts confirmed SCAD values
 import math
 
 # ===================== TRACKS =====================
-TRACK_LENGTH = 96
-TRACK_WIDTH = 16
+TRACK_LENGTH = 82
+TRACK_WIDTH = 14
 TRACK_CENTER_Y = 28
 
-IDLER_RADIUS = 12
-IDLER_X = TRACK_LENGTH / 2  # 48
-IDLER_Z = 22
-ROAD_RADIUS = 9
-ROAD_Z = 16
-ROAD_POSITIONS = [-28, -8, 8, 28]
+IDLER_RADIUS = 10
+IDLER_X = TRACK_LENGTH / 2  # 41
+IDLER_Z = 16
+ROAD_RADIUS = 7
+ROAD_Z = 13
+ROAD_POSITIONS = [-22, -6, 10, 24]
 
 LINK_LENGTH = 10
 LINK_THICKNESS = 3
-TRACK_RADIUS = IDLER_RADIUS + LINK_THICKNESS / 2 + 2  # 15.5
-GROUND_Z = IDLER_Z - TRACK_RADIUS  # 6.5
+TRACK_RADIUS = IDLER_RADIUS + LINK_THICKNESS / 2  # 11.5
+GROUND_Z = IDLER_Z - TRACK_RADIUS  # 4.5
 
 # ===================== HYDRAULIC =====================
 HYDR_WHEEL_RADIUS = 4
 HYDR_WHEEL_WIDTH = 10
-HYDR_BARREL_RADIUS = 5
-HYDR_BARREL_HEIGHT = 14
-HYDR_ROD_RADIUS = 2.5
-HYDR_EXTEND = 42
-HYDR_MOUNT_X = 28
+HYDR_BARREL_RADIUS = 4
+HYDR_BARREL_HEIGHT = 12
+HYDR_ROD_RADIUS = 2
+HYDR_EXTEND = 26.5
+HYDR_MOUNT_X = 24
 HYDR_MOUNT_Y = 0
 
 # ===================== CHASSIS =====================
-CHASSIS_LENGTH = 92
-CHASSIS_BOTTOM = 44
-CHASSIS_HEIGHT = 14
+CHASSIS_LENGTH = 82
+CHASSIS_BOTTOM = 35
+CHASSIS_HEIGHT = 12
 
 # ===================== SEAT =====================
 PEDESTAL_HEIGHT = 24
@@ -51,11 +53,11 @@ FOOTREST_LENGTH = 36
 FOOTREST_HEIGHT = IDLER_Z + 12
 
 # ===================== STAIRS =====================
-STAIR_RISE = 18
-STAIR_RUN = 24
+STAIR_RISE = 16
+STAIR_RUN = 32
 NUM_STEPS = 5
 STAIR_WIDTH = 80
-STAIR_ANGLE = 25  # degrees
+STAIR_ANGLE = math.degrees(math.atan2(STAIR_RISE, STAIR_RUN))  # 26.56 deg
 
 # ===================== COLORS (R,G,B 0-1) =====================
 C_STEEL = (0.35, 0.36, 0.38)

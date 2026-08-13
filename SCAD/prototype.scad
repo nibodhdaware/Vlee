@@ -17,26 +17,31 @@ tiltedTrack(-trackCenterY);
 // Chassis
 chassis();
 
-// Mechanical arm suspension — independent beam above each track
-// Beams mount to L-bracket risers via L-shaped brackets.
+// Mechanical arm suspension — independent beam above each track.
+// The beams are part of the TRACK frame (they pivot with it). Each
+// beam's front flange bears on the front idler axle (the tilt pivot);
+// its rear end ties to the drive sprocket axle below. Nothing here
+// touches the seat.
 for (side = [-1, 1]) {
     suspensionBeam(side * trackCenterY);
     for (x = roadPositions)
         suspension(x, side * trackCenterY);
 
-    // L-shaped bracket: riser (x=41, y=±15) → outboard (x=41, y=±28) → beam (x=29, y=±28).
+    // Drive-end bracket: beam rear (x=29) down to the drive axle (x=41).
     beamZ = idlerZ + trackRadius + 6;
-    // Vertical arm along Y: from riser outboard to beam y-position
+    // Vertical arm: drive axle up to the beam, at y=±28.
     color(matAluminum)
-        translate([idlerX, side * 15 + side * (trackCenterY - 15) / 2, beamZ])
-            cube([4, trackCenterY - 15, 4], center = true);
-    // Horizontal arm along X: from outboard (x=41) to beam end (x=29)
+        translate([idlerX - 2, side * trackCenterY, (idlerZ + beamZ) / 2])
+            cube([4, 5, beamZ - idlerZ], center = true);
+    // Horizontal arm: from the axle bracket back to the beam end.
     color(matAluminum)
         translate([idlerX - 6, side * trackCenterY, beamZ])
             cube([12, 5, 4], center = true);
 }
 
-// Seat — carried by two L-brackets rising from the sprocket cross-bar
+// Seat — two L-brackets pivoting on the FRONT idler cross-track axle.
+// The seat + footrest hang off this pivot and stay level while the
+// track frame pitches underneath during a stair climb.
 for (sy = [-1, 1])
     seatBracket(sy * 15);
 
