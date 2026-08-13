@@ -46,11 +46,6 @@ module suspensionBeam(y) {
     gussetW = B + 4;
     gussetT = 4;
 
-    flangeLen = 12;
-    flangeH = H + 8;
-    flangeW = B + 8;
-    axleR = 5.5;
-
     color(matAluminum)
     union() {
         // I-beam: bottom flange, web, top flange (centered at beamZ)
@@ -68,19 +63,5 @@ module suspensionBeam(y) {
         // Vertical gusset plate at bracket end
         translate([beamEnd - gussetH/2, y, beamZ + gussetT/2 + (H - gussetT)/4])
             cube([gussetH, 3, (H - gussetT)/2], center = true);
-
-        // Flange at chassis end - C-channel base
-        translate([beamStart - flangeLen/2, y, beamZ])
-            cube([flangeLen, flangeW, flangeH], center = true);
-
-        // Flange notch (axle clearance U-shape)
-        translate([beamStart - flangeLen/2 + 3, y, beamZ])
-            difference() {
-                cube([flangeLen - 6, flangeW, flangeH], center = true);
-                cube([flangeLen - 6 - 2*tw, flangeW - 2*tw, flangeH - 2*tw], center = true);
-                translate([-2, 0, -flangeH/2 + axleR + 2])
-                    rotate([90, 0, 0])
-                        cylinder(r = axleR, h = flangeW + 4, center = true, $fn = 24);
-            }
     }
 }
